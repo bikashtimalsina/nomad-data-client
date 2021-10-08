@@ -4,7 +4,7 @@ nomad_url = 'http://nomad-lab.eu/prod/rae/api'
 # create the bravado client
 client = SwaggerClient.from_url('%s/swagger.json' % nomad_url)
 # perform the search request to print number of public entries
-data = client.repo.search(only_atoms=['Nb', 'Sn']).response().result
+data = client.repo.search(only_atoms=['Element_1', 'Element_2']).response().result       # You can add more elements and same on line 18
 # print the total ammount of search results
 total_results=data.pagination.total
 pages=int(total_results/50)+1
@@ -15,7 +15,7 @@ print(total_results)
 #next_test_url=http://nomad-lab.eu/prod/rae/api/raw/query?upload_id=kp7507aMQFKDGPgVTg7GWQ -o download.zip
 nomad_data=[]
 for j in range(pages):
-	data = client.repo.search(only_atoms=['Nb','Sn'],page=j+1,per_page=50).response().result
+	data = client.repo.search(only_atoms=['Element_1','Element_2'],page=j+1,per_page=50).response().result
 #	client.raw.get(upload_id=calc['upload_id'], path=calc['mainfile']).response()
 	data_size=len(data.results)
 	for i in range(data_size):
